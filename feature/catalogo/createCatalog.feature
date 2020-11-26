@@ -1,7 +1,7 @@
 Feature: create catalog
-        As a master user
-        I want to create a catalog
-        so I test that works correctly
+        As a company
+        I want to have catalogs
+        So I can organize and clasify polls by category
 
     Background: login as a master user
         Given I'm in the login page 
@@ -9,7 +9,9 @@ Feature: create catalog
         And I press the " Iniciar Sesión " button
         And I press the "Catalogo" option in the navbar
 
-    Scenario: visit catalog view       
+    Scenario: create new private catalog correctly
+        Given I'm in the "Catalogo" page
+        Then press the "add icon" on the ""       
         
 
 
