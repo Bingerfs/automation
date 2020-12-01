@@ -9,7 +9,12 @@ Given(/^I enter a username and a password$/) do
 end
 
 When(/^I press the "([^"]*)" button$/) do |nombre|
-    click_on(nombre)
+    if(nombre == "Re-abrir")
+        xpath = '/html/body/app-root/div/div/app-events/div/div[5]/div/div[1]/div/event-item/div[1]/div[2]/div/i[2]'
+        find(:xpath, xpath).click
+    else
+        click_on(nombre)
+    end
 end
 
 When(/^I press the "([^"]*)" option$/) do |link|
