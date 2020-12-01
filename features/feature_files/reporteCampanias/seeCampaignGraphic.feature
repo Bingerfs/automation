@@ -8,7 +8,7 @@ Feature: See campaign report graphic
         And I enter a username and a password
         And I press the "Iniciar Sesión" button
         And I press the "Reportes" option
-        And I press the "Campaña" option below
+        And I press the "Campaña" option
 
     Scenario: detailed graphic is the same as it was displayed on the list
         Given I'm on the "Campaña" section of the "Reportes" page

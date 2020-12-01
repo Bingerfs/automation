@@ -11,16 +11,15 @@ Feature: See campaigns list on campaign reports
         And I press the "Campaña" option 
 
     Scenario: created campaign is within the list displayed
-        Given I'm on the "Campaña" section of the "Reportes" page
+        Given I'm on the "Campañas" section of the "Reportes" page
         When I'm on the "CAMPAÑAS DISPONIBLES " section
-        Then a campaign named "Campaign test" should be displayed inside the list
+        Then a campaign named "CasaMatriz" should be displayed inside the list
     
     Scenario: created campaign within the list displays the polls it was assigned to
-        Given I'm on the "Campaña" section of the "Reportes" page
+        Given I'm on the "Campañas" section of the "Reportes" page
         When I'm on the "CAMPAÑAS DISPONIBLES " section
-        And click on the "Campaign test" campaign
+        And click on the "CasaMatriz" campaign
         Then the polls assigned to the campaign should be displayed as below:
-        | Polls         |
-        |  pollTest1    |
-        |  pollTest2    |
+        |Asignacion Cajas       |
+        |Asignacion Plataforma  |
 
