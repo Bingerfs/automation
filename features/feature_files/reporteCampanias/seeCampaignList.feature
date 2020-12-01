@@ -8,7 +8,7 @@ Feature: See campaigns list on campaign reports
         And I enter a username and a password
         And I press the "Iniciar Sesión" button
         And I press the "Reportes" option
-        And I press the "Campaña" option below 
+        And I press the "Campaña" option 
 
     Scenario: created campaign is within the list displayed
         Given I'm on the "Campaña" section of the "Reportes" page
