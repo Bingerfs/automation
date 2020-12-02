@@ -2,9 +2,7 @@ dictionary_routes = {
     "Reportes" => 'reports',
     'Eventos' => 'events' 
 }
-
-
-@auxGlobal = '' 
+ 
 
 
 When(/^I press the "([^"]*)" option$/) do |link|
