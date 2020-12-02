@@ -7,7 +7,7 @@ Feature: Configure the values of a graphic
     Scenario: Negative value four hour values
      Given I'm on the "Campaña" section of the "Reportes" page
         When I'm on the "CAMPAÑAS DISPONIBLES " section
-        And click on the "Campaign test" campaign
+        And click on the "CasaMatriz" campaign
         And click on the "pollTest1" poll
         And all report graphics are displayed
         And click on the gear icon on the "GraphicTest1" graphic

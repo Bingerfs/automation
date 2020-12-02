@@ -4,10 +4,10 @@ Feature: close event
         So I can mark the event as finished
 
     Background: login as a master user
-        Given I am in the login page 
-        And enter a username and a password
-        And I press the " Iniciar Sesión " button
-        And I press the "Eventos" option in the navbar
+        Given I'm on the login page 
+        And I enter a username and a password
+        And I press the "Iniciar Sesión" button
+        And I press the "Eventos" option
         And I am in the "Eventos" page
 
     Scenario: close an No Accionable event

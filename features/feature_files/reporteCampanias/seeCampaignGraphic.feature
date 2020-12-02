@@ -13,7 +13,7 @@ Feature: See campaign report graphic
     Scenario: detailed graphic is the same as it was displayed on the list
         Given I'm on the "Campaña" section of the "Reportes" page
         When I'm on the "CAMPAÑAS DISPONIBLES " section
-        And click on the "Campaign test" campaign
+        And click on the "CasaMatriz" campaign
         And click on the "pollTest1" poll
         And all report graphics are displayed
         And click on the eye icon on the "GraphicTest1" graphic

@@ -8,7 +8,7 @@ Feature: Add new graphic to a campaign poll
     Scenario: Recently created graphic is within the list of graphics
         Given I'm on the "Campaña" section of the "Reportes" page
         When I'm on the "CAMPAÑAS DISPONIBLES " section
-        And click on the "Campaign test" campaign
+        And click on the "CasaMatriz" campaign
         And click on the "pollTest1" TouchPoint poll
         And click on the "Agregar Gráfica" button
         And fill the required fields as below
