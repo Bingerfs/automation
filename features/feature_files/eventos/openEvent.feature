@@ -8,8 +8,7 @@ Feature: re open event
         And enter a username and a password
         And I press the "Iniciar Sesión" button
         And I press the "Eventos" option
-        And I see all closed events
-        # precondicion de filtrar solo eventos cerrados
+        And I filter all "closed" events
 
     Scenario: re open an event
         When I press the "Re-abrir" button
