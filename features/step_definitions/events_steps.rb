@@ -37,13 +37,11 @@ end
 
 #/html/body/div/div
 Then('I should see a green message that says {string}') do |string|
-    expect(page).to have_content(string)
-end
-
-Given('I am in the {string} page') do |string|
-    select('Cerrado', from: '/html/body/app-root/div/div/app-events/div/div[2]/div[2]/select')
+    text = page.driver.browser.switch_to.alert.text
+    expect(text).to eq string
+    #expect(page).to have_content(string)
 end
 
 Given('I filter all {string} events') do |string|
-    pending # Write code here that turns the phrase above into concrete actions
+    select('closed', from: '/html/body/app-root/div/div/app-events/div/div[2]/div[2]/select')
 end
