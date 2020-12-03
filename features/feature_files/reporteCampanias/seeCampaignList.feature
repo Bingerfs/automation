@@ -4,7 +4,7 @@ Feature: See campaigns list on campaign reports
         So I can pick polls to create reports from
 
     Background: login as a master user
-        Given I'm on the login page 
+        Given I am in the login page 
         And I enter a username and a password
         And click on the "Iniciar Sesión" button
         And I press the "Reportes" option

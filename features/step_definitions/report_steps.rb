@@ -63,8 +63,6 @@ Given(/^I'm on the "([^"]*)" section of the "([^"]*)" page$/) do |arg, arg2|
     expect(page).to have_current_path('/dallex/'+route)
 end
 
-When(/^I'm on the "([^"]*)" section$/) do |arg|
-end
 
 Then(/^a campaign named "([^"]*)" should be displayed inside the list$/) do |arg|
     within('.sidebar-reports-campaign') do
@@ -127,9 +125,8 @@ When(/^fill the required mystery poll graphic fields as below$/) do |table|
         dict_graphicFieldsActionMystery[key].(value, modal)
     end
 end
-  
-Then(/^a message in green shows up "([^"]*)"$/) do |message|
-    expect(page).to have_content(message)
+
+When(/^I'm on the "([^"]*)" section$/) do |arg|
 end
 
 Then(/^"([^"]*)" shows up in the graphics list$/) do |graphicName|

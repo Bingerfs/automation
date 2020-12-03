@@ -5,7 +5,7 @@ Feature: Add new graphic to a campaign poll
     So I can have a better report from the result data
 
     Background: login as a master user
-        Given I'm on the login page 
+        Given I am in the login page 
         And I enter a username and a password
         And click on the "Iniciar Sesión" button
         And I press the "Reportes" option

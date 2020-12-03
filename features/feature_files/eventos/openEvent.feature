@@ -4,7 +4,7 @@ Feature: re open event
         So I can enable event 
 
     Background: login as a master user
-        Given I'm on the login page 
+        Given I am in the login page 
         And I enter a username and a password
         And I press the "Iniciar Sesión" button
         And I press the "Eventos" option

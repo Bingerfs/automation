@@ -1,5 +1,5 @@
 
-Given(/^I'm on the login page$/) do
+Given(/^I am in the login page$/) do
     page.driver.browser.manage.window.maximize
     visit ('/')
 end
@@ -13,4 +13,8 @@ When(/^click on the "([^"]*)" button$/) do |nombre|
     button = find_button(nombre)
     scroll_to(button)
     button.click
+end
+
+Then(/^a message in green shows up "([^"]*)"$/) do |message|
+    expect(page).to have_content(message)
 end
