@@ -8,7 +8,6 @@ Feature: close event
         And enter a username and a password
         And I press the "Iniciar Sesión" button
         And I press the "Eventos" option
-        
 
     Scenario: close an No Accionable event
         When I press the "Cerrar" button 

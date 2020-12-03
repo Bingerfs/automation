@@ -13,6 +13,7 @@ begin require 'rspec/expectations'; rescue LoadError; require 'spec/expectations
     
     # Set the host the Capybara tests should be run against
     Capybara.app_host = ENV["CAPYBARA_HOST"]
+    Capybara.save_path = './screenshots'
     
     # Set the time (in seconds) Capybara should wait for elements to appear on the page
     Capybara.default_max_wait_time = 15
@@ -30,7 +31,7 @@ begin require 'rspec/expectations'; rescue LoadError; require 'spec/expectations
     end
     # Register various Selenium drivers
     #CapybaraDriverRegistrar.register_selenium_driver(:internet_explorer)
-    #CapybaraDriverRegistrar.register_selenium_driver(:firefox)
-    CapybaraDriverRegistrar.register_selenium_driver(:chrome)
+    CapybaraDriverRegistrar.register_selenium_driver(:firefox)
+    #CapybaraDriverRegistrar.register_selenium_driver(:chrome)
     Capybara.run_server = false
     #World(Capybara)
