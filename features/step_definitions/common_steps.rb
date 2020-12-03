@@ -1,4 +1,5 @@
-Given(/^I'm on the login page$/) do
+
+Given(/^I am in the login page$/) do
     page.driver.browser.manage.window.maximize
     visit ('/')
 end
@@ -8,6 +9,12 @@ Given(/^I enter a username and a password$/) do
     fill_in 'passwordField', :with => ENV['PSW']
 end
 
-When(/^I press the "([^"]*)" button$/) do |nombre|
-    click_on(nombre)
+When(/^click on the "([^"]*)" button$/) do |nombre|
+    button = find_button(nombre)
+    scroll_to(button)
+    button.click
+end
+
+Then(/^a message in green shows up "([^"]*)"$/) do |message|
+    expect(page).to have_content(message)
 end
