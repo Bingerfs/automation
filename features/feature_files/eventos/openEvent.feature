@@ -12,4 +12,4 @@ Feature: re open event
 
     Scenario: re open an event
         When I press the "Re-abrir" button
-        Then I should see a green message that says "Evento re-abierto con éxito"
+        Then a message in green shows up "Evento re-abierto con éxito"

@@ -13,14 +13,14 @@ Feature: close event
         When I press the "Cerrar" button 
         And I choose "No Accionable" checkbox
         And I press "Cerrar" button
-        Then I should see a green message that says "Evento cerrado con éxito"
+        Then a message in green shows up "Evento cerrado con éxito"
 
     Scenario: close an Accionable and Offline event
         When I press the "Cerrar" button 
         And I choose "Accionable" checkbox
         And I choose "Offline" checkbox
         And I press "Cerrar" button
-        Then I should see a green message that says "Evento cerrado con éxito"
+        Then a message in green shows up "Evento cerrado con éxito"
 
     Scenario: close an Accionable, Online and Contactado event
         When I press the "Cerrar" button 
@@ -28,7 +28,7 @@ Feature: close event
         And I choose "Online" checkbox
         And I choose "Contactado" checkbox
         And I press "Cerrar" button
-        Then I should see a green message that says "Evento cerrado con éxito"
+        Then a message in green shows up "Evento cerrado con éxito"
 
     Scenario: close an Accionable, Online and No Contactado event
         When I press the "Cerrar" button 
@@ -37,18 +37,18 @@ Feature: close event
         And I choose "No Contactado" checkbox
         And I write "No comments" in "Comentarios"
         And I press "Cerrar" button
-        Then I should see a green message that says "Evento cerrado con éxito"
+        Then a message in green shows up "Evento cerrado con éxito"
 
     Scenario: close an event without comments
         When I press the "Cerrar" button 
         And I choose "No Accionable" checkbox
         #And I write " " in "Comentarios"
         And I press "Cerrar" button
-        Then I should see a green message that says "Evento cerrado con éxito"
+        Then a message in green shows up "Evento cerrado con éxito"
 
     Scenario: close an event with some comment
         When I press the "Cerrar" button 
         And I choose "No Accionable" checkbox
         And I write "This is a comment" in "Comentarios"
         And I press "Cerrar" button
-        Then I should see a green message that says "Evento cerrado con éxito"
+        Then a message in green shows up "Evento cerrado con éxito"
