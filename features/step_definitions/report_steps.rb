@@ -16,7 +16,11 @@ dictionary_graphics = {
 dictionary_graphicFieldsAction = {
     'Nombre:' => ->(value, element) { element.fill_in('title', with: value) },
     'Tipo de gráfico:' => ->(value, element) { element.select(value, from: 'type') },
-    'Pregunta:' => ->(value, element) { element.select(value, from: 'questionOpt') }
+    'Pregunta:' => ->(value, element) { element.select(value, from: 'questionOpt') },
+    'Regionales:' => ->(value, element) { element.select(value, from: 'regionals') },
+    'Agencias:' => ->(value, element) { element.select(value, from: 'agencies') },
+    'Servicios:' => ->(value, element) { element.select(value, from: 'services') },
+    'Puntos de Servicio:' => ->(value, element) { element.select(value, from: 'points') },
 }
 
 dict_graphicFieldsActionMystery = {
@@ -30,7 +34,11 @@ dictionary_graphicFields = {
     'Nombre:' => 'title',
     'Tipo de gráfico:' => 'type',
     'Pregunta:' => 'questionOpt',
-    'Lista:' => 'group'
+    'Lista:' => 'group',
+    'Regionales:' => 'regionals',
+    'Agencias:' => 'agencies',
+    'Servicios:' => 'services',
+    'Puntos de Servicio:' => 'points' 
 }
 
 dictionary_graphicFieldsMystery = {
@@ -146,4 +154,15 @@ Then(/^"([^"]*)" field shows a set of list related questions as below$/) do |fie
     questionsList = questionsList.flatten
     field = find_field(dictionary_graphicFieldsMystery[fieldName])
     questionsList.each { |question| expect(field).to have_content(question) }
+end
+
+When(/^click on the gear icon on the "([^"]*)" graphic$/) do |graphicName|
+    titulo = find('span', text: graphicName)
+    chart = titulo.ancestor('chart')
+    chart.find('.fa-cog').click
+end
+
+When(/^select "([^"]*)" on the "([^"]*)" field$/) do |option, field|
+    modal = find('app-settings')
+    dictionary_graphicFieldsAction[field].(option, modal)
 end

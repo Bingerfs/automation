@@ -1,6 +1,5 @@
+=begin
 Before('@ReporteCampania') do
-    page.driver.browser.manage.window.maximize
-    log('The thing')
     visit ('/')
     fill_in 'usernameField', :with => ENV['USER']
     fill_in 'passwordField', :with => ENV['PSW']
@@ -15,6 +14,51 @@ Before('@ReporteCampania') do
         select('Los olivos')
         click_on('Crear')
     end
+    find('span', text: 'CatalogTest').click
+    find('span', text: 'Crear Encuesta').click
+    within('app-create-survey') do
+        find(:xpath, '/html/body/modal-container/div/div/app-create-survey/div/form/div[1]/div[1]/input').fill_in(:with => 'pollTest')
+        find(:xpath, '/html/body/modal-container/div/div/app-create-survey/div/form/div[1]/div[2]/input').fill_in(:with => 'poll test')
+        find(:xpath, '/html/body/modal-container/div/div/app-create-survey/div/form/div[1]/div[3]/select').select('Customer Experience')
+        find(:xpath, '/html/body/modal-container/div/div/app-create-survey/div/form/div[1]/div[4]/ng-select/div/div/div[2]/input').fill_in(:with => 'autT')
+        find('span', text: 'autT').click
+        click_on('Crear')
+    end
+    find('span', text: 'CatalogTest').click
+    find('span', text: 'pollTest').click
+    click_on('Agregar Vista')
+    within('app-create-survey-view') do
+        find(:xpath, '/html/body/modal-container/div/div/app-create-survey-view/div/form/div[1]/div[1]/input').fill_in(:with => 'TV1')
+        select('Inicial')
+        find(:xpath, '/html/body/modal-container/div/div/app-create-survey-view/div/form/div[1]/div[3]/input').fill_in(:with => 'Vista inicial')
+        click_on('Crear')
+    end
+    click_on('Agregar Vista')
+    within('app-create-survey-view') do
+        find(:xpath, '/html/body/modal-container/div/div/app-create-survey-view/div/form/div[1]/div[1]/input').fill_in(:with => 'TV2')
+        select('Regular')
+        click_on('Crear')
+    end
+    click_on('Agregar Vista')
+    within('app-create-survey-view') do
+        find(:xpath, '/html/body/modal-container/div/div/app-create-survey-view/div/form/div[1]/div[1]/input').fill_in(:with => 'TV3')
+        select('Final')
+        find(:xpath, '/html/body/modal-container/div/div/app-create-survey-view/div/form/div[1]/div[3]/input').fill_in(:with => 'Vista final')
+        click_on('Crear')
+    end
+    elementName = find('div', text: 'TV2')
+    parentContainer = elementName.ancestor('.odd-text')
+    within(parentContainer) do
+        find('i.fa:nth-child(2)').click
+    end
+    click_on('Agregar pregunta ')
+    within('app-create-question') do
+        find(:xpath, '/html/body/modal-container/div/div/app-create-question/div/form/div[1]/div[1]/input').fill_in(:with => 'questionTest')
+        select('Escala de Puntos')
+        find(:xpath, '/html/body/modal-container/div/div/app-create-question/div/form/div[1]/div[3]/score-range/div[1]/input').fill_in(:with => '1')
+        find(:xpath, '/html/body/modal-container/div/div/app-create-question/div/form/div[1]/div[3]/score-range/div[2]/input').fill_in(:with => '3')
+        click_on('Crear')
+    end
     visit ('http://3.14.118.36:8080/dallex/campaigns')
     click_on('Agregar Campaña')
     within('app-create-campaign') do
@@ -23,6 +67,18 @@ Before('@ReporteCampania') do
         fill_in('Fecha de inicio', :with => '02-03-2020')
         fill_in('Fecha de conclusión', :with => '02-12-2020')
         find(:xpath, '/html/body/modal-container/div/div/app-create-campaign/div/form/div[1]/div[5]/input').fill_in(:with => '#de70e6')
-        attach_file('file', File.absolute_path('images/EZywBTTVcAE5r3J.jpeg'), make_visible: true)
+        find('#file', visible: :all).send_keys(File.expand_path('images\EZywBTTVcAE5r3J.jpeg'))
+        click_on('Crear')
+    end
+    find('span', text: 'CampaignTest').click
+    click_on('Asignar Encuesta')
+    within('app-assign-surveys') do
+        fill_in('Ingrese nombre de asignación', :with => 'pollAsigned')
+        fill_in('Fecha de inicio', :with => '02-03-2020')
+        fill_in('Fecha de conclusión', :with => '20-12-2020')
+        find('span', text: 'pollTest').click
+        check()
+        click_on('Asignar')
     end
 end
+=end
