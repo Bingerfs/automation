@@ -30,7 +30,12 @@ dictionary_graphicFields = {
     'Nombre:' => 'title',
     'Tipo de gráfico:' => 'type',
     'Pregunta:' => 'questionOpt',
-    'Lista:' => 'group'
+    'Lista:' => 'group',
+    'Regionales:' => 'regionals',
+    'Compañia:' => 'companyOpt',
+    'Agencias:' => 'agencies',
+    'Servicios:'=> 'services',
+    'Puntos de Servicio:' => 'points'
 }
 
 dictionary_graphicFieldsMystery = {
@@ -53,6 +58,8 @@ end
 When(/^I press the "([^"]*)" option$/) do |link|
     if link == 'Reportes' || link == 'Campaña'
         visit('http://3.14.118.36:8080/dallex/reports')
+    elsif(link == 'Eventos')
+        visit('http://3.14.118.36:8080/dallex/reports/events')
     else
         click_on(link)
     end
@@ -114,6 +121,9 @@ When(/^fill the required graphic fields as below$/) do |table|
     data = table.rows_hash
     data.each_pair do |key, value|
         modal = find('app-create-chart')
+        if (modal == nil)
+            modal = find('app-event-chart')
+        end
         dictionary_graphicFieldsAction[key].(value, modal)
     end
 end
@@ -146,4 +156,15 @@ Then(/^"([^"]*)" field shows a set of list related questions as below$/) do |fie
     questionsList = questionsList.flatten
     field = find_field(dictionary_graphicFieldsMystery[fieldName])
     questionsList.each { |question| expect(field).to have_content(question) }
+end
+
+When('click on the gear icon on the {string} graphic') do |string|
+    titulo = find('span', text: string)
+    chart = titulo.ancestor('chart')
+    chart.find('.fa-cog').click
+end
+  
+When('select {string} on the {string} field') do |string, string2|
+    modal = find('app-event-settings')
+    modal.select(string, from: dictionary_graphicFields[string2])
 end
