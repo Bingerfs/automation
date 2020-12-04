@@ -11,7 +11,7 @@ end
 When(/^I press the "([^"]*)" option$/) do |link|
     if link == 'Reportes' || link == 'Campaña'
         visit('http://3.14.118.36:8080/dallex/reports')
-    elsif(link == 'Eventos')
+    elsif(link == 'ReportesEventos')
         visit('http://3.14.118.36:8080/dallex/reports/events')
     else
         click_on(link)

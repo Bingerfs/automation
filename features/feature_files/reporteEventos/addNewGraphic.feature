@@ -9,7 +9,7 @@ Feature: Add new graphic to campaign
         And I enter a username and a password
         And click on the "Iniciar Sesión" button
         And I press the "Reportes" option
-        And I press the "Eventos" option
+        And I press the "ReportesEventos" option
 
     Scenario: Recently created graphic is within the list of graphics
             Given I'm on the "Eventos" section of the "Reportes" page

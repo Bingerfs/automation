@@ -8,7 +8,7 @@ Feature: See event report graphic
         And I enter a username and a password
         And click on the "Iniciar Sesión" button
         And I press the "Reportes" option
-        And I press the "Eventos" option
+        And I press the "ReportesEventos" option
 
         Scenario: detailed graphic is the same as it was displayed on the list
         Given I'm on the "Eventos" section of the "Reportes" page

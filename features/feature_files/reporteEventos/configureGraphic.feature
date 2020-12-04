@@ -9,7 +9,7 @@ Feature: Configure the values of a graphic
         And I enter a username and a password
         And click on the "Iniciar Sesión" button
         And I press the "Reportes" option
-        And I press the "Eventos" option
+        And I press the "ReportesEventos" option
 
 #Regionales
     Scenario: detailed graphic is the same as it was displayed on the list
