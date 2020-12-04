@@ -14,7 +14,7 @@ Feature: Add new graphic to campaign
     Scenario: Recently created graphic is within the list of graphics
             Given I'm on the "Eventos" section of the "Reportes" page
             When click on the "Agregar Gráfica" button
-            And fill the required graphic fields as below
+            And fill the required graphic events fields as below
             |Nombre:            | EventGraphicTest2                         |
             |Tipo de gráfico:   | Barra Apilada                             |
 

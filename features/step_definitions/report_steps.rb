@@ -1,7 +1,7 @@
 
 When(/^I press the "([^"]*)" button$/) do |nombre|
     if(nombre == "Re-abrir" || nombre == "Cerrar")
-        xpath = '/html/body/app-root/div/div/app-events/div/div[5]/div/div[1]/div/event-item/div[1]/div[2]/div/i[2]'
+        xpath = '/html/body/app-root/div/div/app-events/div/div[5]/div/div[2]/div/event-item/div[1]/div[2]/div/i[2]'
         find(:xpath, xpath).click
     else
         click_on(nombre)
@@ -73,10 +73,15 @@ end
 When(/^fill the required graphic fields as below$/) do |table|
     data = table.rows_hash
     data.each_pair do |key, value|
-        modal = find('app-create-chart')
-        if (modal == nil)
-            modal = find('app-event-chart')
-        end
+        modal = find('app-create-chart')    
+        getFieldAction(key).(value, modal)
+    end
+end
+
+When(/^fill the required graphic events fields as below$/) do |table|
+    data = table.rows_hash
+    data.each_pair do |key, value|
+        modal = find('app-event-chart')      
         getFieldAction(key).(value, modal)
     end
 end
@@ -110,18 +115,10 @@ Then(/^"([^"]*)" field shows a set of list related questions as below$/) do |fie
     field = find_field(getGraphicMysteryField(fieldName))
     questionsList.each { |question| expect(field).to have_content(question) }
 end
-
-When('click on the gear icon on the {string} graphic') do |string|
-    titulo = find('span', text: string)
-    chart = titulo.ancestor('chart')
-    chart.find('.fa-cog').click
-end
   
-When('select {string} on the {string} field') do |string, string2|
-    modal = find('app-event-settings')
-    modal.select(string, from: dictionary_graphicFields[string2])
+
 When(/^click on the gear icon on the "([^"]*)" graphic$/) do |graphicName|
-    titulo = find('span', text: graphicName)
+    titulo = find('span', text: graphicName, match: :prefer_exact)
     chart = titulo.ancestor('chart')
     chart.find('.fa-cog').click
 end
@@ -129,4 +126,9 @@ end
 When(/^select "([^"]*)" on the "([^"]*)" field$/) do |option, field|
     modal = find('app-settings')
     getFieldAction(field).(option, modal)
+end
+
+When(/^select "([^"]*)" on the "([^"]*)" field events$/) do |option, field|
+    modal = find('app-event-settings')
+    modal.select(option, from: getPollField(field))
 end

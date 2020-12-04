@@ -5,9 +5,10 @@ module Dictionary_PollFields
         'Pregunta:' => 'questionOpt',
         'Lista:' => 'group',
         'Regionales:' => 'regionals',
+        'Compañia:' => 'companyOpt',
         'Agencias:' => 'agencies',
-        'Servicios:' => 'services',
-        'Puntos de Servicio:' => 'points' 
+        'Servicios:'=> 'services',
+        'Puntos de Servicio:' => 'points'
     }
 
     define_method(:getPollField) { |field| return dict[field] }

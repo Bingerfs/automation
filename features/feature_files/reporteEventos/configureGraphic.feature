@@ -15,7 +15,7 @@ Feature: Configure the values of a graphic
     Scenario: detailed graphic is the same as it was displayed on the list
         Given I'm on the "Eventos" section of the "Reportes" page
         When click on the gear icon on the "Barra Simple" graphic
-        And select "Telefonica" on the "Compañia:" field
+        And select "Telefonica" on the "Compañias:" field events
         Then "Regionales:" field shows a set of options as below
         |Ninguna|
         |Cochabamba |
@@ -26,21 +26,22 @@ Feature: Configure the values of a graphic
     Scenario: detailed graphic is the same as it was displayed on the list
         Given I'm on the "Eventos" section of the "Reportes" page
         When click on the gear icon on the "Barra Simple" graphic
-        And select "Telefonica" on the "Compañia:" field
+        And select "Telefonica" on the "Compañias:" field events
         Then "Agencias:" field shows a set of options as below
         |Ninguna|
-        |Agencia 1 |
-        |Agencia 2 |
+        |Central |
+        |Ventas |
+        |Atencion al Cliente|
 
 #servicios
     Scenario: detailed graphic is the same as it was displayed on the list
         Given I'm on the "Eventos" section of the "Reportes" page
         When click on the gear icon on the "Barra Simple" graphic
-        And select "Telefonica" on the "Compañia:" field
-        And select "Cochabamba" on the "Regionales:" field
-        And select "Agencia 1" on the "Agencias:" field
+        And select "Telefonica" on the "Compañias:" field events
+        And select "Cochabamba" on the "Regionales:" field events
+        And select "Agencia 1" on the "Agencias:" field events
         Then "Servicios:" field shows a set of options as below
-        |Ninguna|
+        |Ninguno|
         |Cajas |
         |Plataforma |
     
@@ -48,11 +49,11 @@ Feature: Configure the values of a graphic
     Scenario: detailed graphic is the same as it was displayed on the list
         Given I'm on the "Eventos" section of the "Reportes" page
         When click on the gear icon on the "Barra Simple" graphic
-        And select "Telefonica" on the "Compañia:" field
-        And select "Cochabamba" on the "Regionales:" field
-        And select "Agencia 1" on the "Agencias:" field
-        And select "Cajas" on the "Servicios:" field
+        And select "Telefonica" on the "Compañias:" field events
+        And select "Cochabamba" on the "Regionales:" field events
+        And select "Agencia 1" on the "Agencias:" field events
+        And select "Cajas" on the "Servicios:" field events
         Then "Puntos de Servicio:" field shows a set of options as below
-        |Ninguna|
-        |Cajas 1 |
-        |Cajas 2 |
+        |Ninguno|
+        |Caja 1 |
+        |Caja 2 |
