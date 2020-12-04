@@ -16,7 +16,7 @@ begin require 'rspec/expectations'; rescue LoadError; require 'spec/expectations
     Capybara.save_path = './screenshots'
     
     # Set the time (in seconds) Capybara should wait for elements to appear on the page
-    Capybara.default_max_wait_time = 15
+    Capybara.default_max_wait_time = 120
     Capybara.default_driver = :selenium
     Capybara.app_host = "http://3.14.118.36:8080/dallex/login"
     
@@ -35,3 +35,5 @@ begin require 'rspec/expectations'; rescue LoadError; require 'spec/expectations
     #CapybaraDriverRegistrar.register_selenium_driver(:chrome)
     Capybara.run_server = false
     #World(Capybara)
+
+    

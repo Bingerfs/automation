@@ -1,6 +1,5 @@
 
 Given(/^I am in the login page$/) do
-    page.driver.browser.manage.window.maximize
     visit ('/')
 end
 
