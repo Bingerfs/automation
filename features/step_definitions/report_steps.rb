@@ -1,5 +1,4 @@
 
-
 When(/^I press the "([^"]*)" button$/) do |nombre|
     if(nombre == "Re-abrir" || nombre == "Cerrar")
         xpath = '/html/body/app-root/div/div/app-events/div/div[5]/div/div[1]/div/event-item/div[1]/div[2]/div/i[2]'
@@ -12,6 +11,8 @@ end
 When(/^I press the "([^"]*)" option$/) do |link|
     if link == 'Reportes' || link == 'Campaña'
         visit('http://3.14.118.36:8080/dallex/reports')
+    elsif(link == 'Eventos')
+        visit('http://3.14.118.36:8080/dallex/reports/events')
     else
         click_on(link)
     end
@@ -73,6 +74,9 @@ When(/^fill the required graphic fields as below$/) do |table|
     data = table.rows_hash
     data.each_pair do |key, value|
         modal = find('app-create-chart')
+        if (modal == nil)
+            modal = find('app-event-chart')
+        end
         getFieldAction(key).(value, modal)
     end
 end
@@ -107,6 +111,15 @@ Then(/^"([^"]*)" field shows a set of list related questions as below$/) do |fie
     questionsList.each { |question| expect(field).to have_content(question) }
 end
 
+When('click on the gear icon on the {string} graphic') do |string|
+    titulo = find('span', text: string)
+    chart = titulo.ancestor('chart')
+    chart.find('.fa-cog').click
+end
+  
+When('select {string} on the {string} field') do |string, string2|
+    modal = find('app-event-settings')
+    modal.select(string, from: dictionary_graphicFields[string2])
 When(/^click on the gear icon on the "([^"]*)" graphic$/) do |graphicName|
     titulo = find('span', text: graphicName)
     chart = titulo.ancestor('chart')
