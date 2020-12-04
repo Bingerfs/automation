@@ -1,7 +1,7 @@
 
 When(/^I press the "([^"]*)" button$/) do |nombre|
     if(nombre == "Re-abrir" || nombre == "Cerrar")
-        xpath = '/html/body/app-root/div/div/app-events/div/div[5]/div/div[2]/div/event-item/div[1]/div[2]/div/i[2]'
+        xpath = '/html/body/app-root/div/div/app-events/div/div[5]/div/div[1]/div/event-item/div[1]/div[2]/div/i[2]'
         find(:xpath, xpath).click
     else
         click_on(nombre)

@@ -52,7 +52,7 @@ module Factory_FieldGraphicMysteryAction
         'Pregunta:' => ->(value, element) { element.select(value, from: 'question') },
         'Lista:' => ->(value, element) { element.select(value, from: 'group') }
     }
-    define_method(:getFielMysterydAction) { |field| return dict[field] }
+    define_method(:getFieldMysteryAction) { |field| return dict[field] }
 end
 
 module Dictionary_GraphicNames
