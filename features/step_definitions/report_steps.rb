@@ -1,45 +1,3 @@
-dictionary_routes = { 
-    "Reportes" => 'reports',
-    'Eventos' => 'events' 
-}
-
-dictionary_graphics = {
-    'Barra Agrupada' => 'grouped-bar-chart',
-    'Barra Simple' => 'bar-chart',
-    'Barra Apilada' => 'stacked-bar-chart',
-    'Area Agrupada' => 'area-chart',
-    'Circular' => 'pie-chart',
-    'Lineas' => 'line-chart',
-    'Contador' => 'counter'
-}
-
-dictionary_graphicFieldsAction = {
-    'Nombre:' => ->(value, element) { element.fill_in('title', with: value) },
-    'Tipo de gráfico:' => ->(value, element) { element.select(value, from: 'type') },
-    'Pregunta:' => ->(value, element) { element.select(value, from: 'questionOpt') }
-}
-
-dict_graphicFieldsActionMystery = {
-    'Nombre:' => ->(value, element) { element.fill_in('title', with: value) },
-    'Tipo de gráfico:' => ->(value, element) { element.select(value, from: 'type') },
-    'Pregunta:' => ->(value, element) { element.select(value, from: 'question') },
-    'Lista:' => ->(value, element) { element.select(value, from: 'group') }
-}
-
-dictionary_graphicFields = {
-    'Nombre:' => 'title',
-    'Tipo de gráfico:' => 'type',
-    'Pregunta:' => 'questionOpt',
-    'Lista:' => 'group'
-}
-
-dictionary_graphicFieldsMystery = {
-    'Nombre:' => 'title',
-    'Tipo de gráfico:' => 'type',
-    'Pregunta:' => 'question',
-    'Lista:' => 'group'
-}
-
 
 When(/^I press the "([^"]*)" button$/) do |nombre|
     if(nombre == "Re-abrir" || nombre == "Cerrar")
@@ -53,13 +11,15 @@ end
 When(/^I press the "([^"]*)" option$/) do |link|
     if link == 'Reportes' || link == 'Campaña'
         visit('http://3.14.118.36:8080/dallex/reports')
+    elsif(link == 'ReportesEventos')
+        visit('http://3.14.118.36:8080/dallex/reports/events')
     else
         click_on(link)
     end
 end
 
 Given(/^I'm on the "([^"]*)" section of the "([^"]*)" page$/) do |arg, arg2|
-    route = dictionary_routes[arg2] + (arg == 'Campañas' ? '' : ('/' + dictionary_routes[arg]))
+    route = getRoute(arg2) + (arg == 'Campañas' ? '' : ('/' + getRoute(arg)))
     expect(page).to have_current_path('/dallex/'+route)
 end
 
@@ -100,12 +60,12 @@ When(/^click on the eye icon on the "([^"]*)" graphic of type "([^"]*)"$/) do |g
     titulo = find('span', text: graphic)
     chart = titulo.ancestor('chart')
     chart.find('.fa-eye').click
-    @expectedChart = chart.find(dictionary_graphics[graphicType])
+    @expectedChart = chart.find(getGraphicName(graphicType))
 end
 
 Then(/^I should see the same graphic "([^"]*)" as it was displayed on the list$/) do |graphicType|
     modal = find('app-full-view')
-    actualChart = modal.find(dictionary_graphics[graphicType])
+    actualChart = modal.find(getGraphicName(graphicType))
     expect(actualChart['ng-reflect-question-id']).to eq(@expectedChart['ng-reflect-question-id'])
     expect(actualChart['ng-reflect-chart-id']).to eq(@expectedChart['ng-reflect-chart-id'])
 end
@@ -113,8 +73,16 @@ end
 When(/^fill the required graphic fields as below$/) do |table|
     data = table.rows_hash
     data.each_pair do |key, value|
-        modal = find('app-create-chart')
-        dictionary_graphicFieldsAction[key].(value, modal)
+        modal = find('app-create-chart')    
+        getFieldAction(key).(value, modal)
+    end
+end
+
+When(/^fill the required graphic events fields as below$/) do |table|
+    data = table.rows_hash
+    data.each_pair do |key, value|
+        modal = find('app-event-chart')      
+        getFieldAction(key).(value, modal)
     end
 end
 
@@ -122,7 +90,7 @@ When(/^fill the required mystery poll graphic fields as below$/) do |table|
     data = table.rows_hash
     data.each_pair do |key, value|
         modal = find('app-ms-chart')
-        dict_graphicFieldsActionMystery[key].(value, modal)
+        getFieldMysteryAction(key).(value, modal)
     end
 end
 
@@ -137,13 +105,30 @@ end
 Then(/^"([^"]*)" field shows a set of options as below$/) do |fieldName, questionsList|
     questionsList = questionsList.raw
     questionsList = questionsList.flatten
-    field = find_field(dictionary_graphicFields[fieldName])
+    field = find_field(getPollField(fieldName))
     questionsList.each { |question| expect(field).to have_content(question) }
 end 
 
 Then(/^"([^"]*)" field shows a set of list related questions as below$/) do |fieldName, questionsList|
     questionsList = questionsList.raw
     questionsList = questionsList.flatten
-    field = find_field(dictionary_graphicFieldsMystery[fieldName])
+    field = find_field(getGraphicMysteryField(fieldName))
     questionsList.each { |question| expect(field).to have_content(question) }
+end
+  
+
+When(/^click on the gear icon on the "([^"]*)" graphic$/) do |graphicName|
+    titulo = find('span', text: graphicName, match: :prefer_exact)
+    chart = titulo.ancestor('chart')
+    chart.find('.fa-cog').click
+end
+
+When(/^select "([^"]*)" on the "([^"]*)" field$/) do |option, field|
+    modal = find('app-settings')
+    getFieldAction(field).(option, modal)
+end
+
+When(/^select "([^"]*)" on the "([^"]*)" field events$/) do |option, field|
+    modal = find('app-event-settings')
+    modal.select(option, from: getPollField(field))
 end
