@@ -4,17 +4,16 @@ Feature: See campaign report graphic
         So I can see the data report as feedback
 
     Background: login as a master user
-        Given I'm on the login page 
+        Given I am in the login page 
         And I enter a username and a password
-        And I press the "Iniciar Sesión" button
+        And click on the "Iniciar Sesión" button
         And I press the "Reportes" option
-        And I press the "Campaña" option below
+        And I press the "Campaña" option
 
     Scenario: detailed graphic is the same as it was displayed on the list
-        Given I'm on the "Campaña" section of the "Reportes" page
+        Given I'm on the "Campañas" section of the "Reportes" page
         When I'm on the "CAMPAÑAS DISPONIBLES " section
-        And click on the "Campaign test" campaign
-        And click on the "pollTest1" poll
-        And all report graphics are displayed
-        And click on the eye icon on the "GraphicTest1" graphic
-        Then I should see the same graphic as it was displayed on the list
+        And click on the "CasaMatriz" campaign
+        And click on the "Asignacion Cajas" poll
+        And click on the eye icon on the "GraphicTest1" graphic of type "Barra Agrupada"
+        Then I should see the same graphic "Barra Agrupada" as it was displayed on the list
