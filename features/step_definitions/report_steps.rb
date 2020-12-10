@@ -8,14 +8,16 @@ When(/^I press the "([^"]*)" button$/) do |nombre|
     end
 end
 
+
+
 When(/^I press the "([^"]*)" option$/) do |link|
-    if link == 'Reportes' || link == 'Campaña'
-        visit('http://3.14.118.36:8080/dallex/reports')
-    elsif(link == 'ReportesEventos')
-        visit('http://3.14.118.36:8080/dallex/reports/events')
-    else
-        click_on(link)
-    end
+  navbar = Navbar.new(page)
+  navbar.go_to(link)
+end
+
+When(/^I press the "([^"]*)" option within "([^"]*)"$/) do |option, link|
+    navbar = Navbar.new(page)
+    navbar.go_to(link, option)
 end
 
 Given(/^I'm on the "([^"]*)" section of the "([^"]*)" page$/) do |arg, arg2|
@@ -24,50 +26,37 @@ Given(/^I'm on the "([^"]*)" section of the "([^"]*)" page$/) do |arg, arg2|
 end
 
 
-Then(/^a campaign named "([^"]*)" should be displayed inside the list$/) do |arg|
-    within('.sidebar-reports-campaign') do
-        element = find('span', text: arg)
-        expect(element.text).to eq(arg)
-    end
+Then(/^a campaign named "([^"]*)" is displayed inside the list$/) do |campaign|
+  @reportCampaignPage = ReportCampaign.new(page)
+  campaigns = @reportCampaignPage.getCampaigns
+  expect(campaigns).to include(campaign)
 end 
 
 When(/^click on the "([^"]*)" campaign$/) do |campaign|
     @campaignShared = campaign
-    within('.sidebar-reports-campaign') do
-        element = find('span', text: campaign)
-        element.click
-    end
+    @reportCampaignPage = ReportCampaign.new(page)
+    @reportCampaignPage.clickOnCampaign(campaign)
 end
 
 Then(/^the polls assigned to the campaign are displayed as below:$/) do |list|
     data = list.raw
     data = data.flatten
-    listOfCampaigns = find('.sidebar-reports-campaign')
-    data.each {|poll| expect(listOfCampaigns).to have_content(poll)}
+    polls = @reportCampaignPage.getPolls(@campaignShared)
+    data.each { |expectedPoll| expect(polls).to include(expectedPoll) }
 end
 
 When(/^click on the "([^"]*)" poll$/) do |poll|
-    @pollShared = poll
-    within('.sidebar-reports-campaign') do
-        element = find('span', text: @campaignShared)
-        parentContainer = element.find(:xpath, '../../../..')
-        foundPoll = parentContainer.find('span', text: poll)
-        foundPoll.click
-    end
+  @reportCampaignPage.clickOnPoll(poll)
 end
 
 When(/^click on the eye icon on the "([^"]*)" graphic of type "([^"]*)"$/) do |graphic, graphicType|
-    titulo = find('span', text: graphic)
-    chart = titulo.ancestor('chart')
-    chart.find('.fa-eye').click
-    @expectedChart = chart.find(getGraphicName(graphicType))
+  @reportCampaignPage.openGraphic(graphic)
 end
 
-Then(/^I should see the same graphic "([^"]*)" as it was displayed on the list$/) do |graphicType|
-    modal = find('app-full-view')
-    actualChart = modal.find(getGraphicName(graphicType))
-    expect(actualChart['ng-reflect-question-id']).to eq(@expectedChart['ng-reflect-question-id'])
-    expect(actualChart['ng-reflect-chart-id']).to eq(@expectedChart['ng-reflect-chart-id'])
+Then(/^I see the same graphic "([^"]*)" of type "([^"]*)" as it was displayed on the list$/) do |graphicName, graphicType|
+  expected = @reportCampaignPage.getGraphicInfoFromList(graphicName, graphicType)
+  actual = @reportCampaignPage.getGraphicInfoFromModal(graphicName, graphicType)
+  expect(actual).to eq(expected)
 end
 
 When(/^fill the required graphic fields as below$/) do |table|
@@ -80,52 +69,44 @@ end
 
 When(/^fill the required graphic events fields as below$/) do |table|
     data = table.rows_hash
-    data.each_pair do |key, value|
-        modal = find('app-event-chart')      
-        getFieldAction(key).(value, modal)
-    end
+    @reportCampaignPage.fillInNewGraphicData(data['Nombre:'], data['Tipo de gráfico:'], data['Pregunta:'])
 end
 
 When(/^fill the required mystery poll graphic fields as below$/) do |table|
     data = table.rows_hash
-    data.each_pair do |key, value|
-        modal = find('app-ms-chart')
-        getFieldMysteryAction(key).(value, modal)
-    end
+    @reportCampaignPage.fillInNewMysteryGraphicData(data['Nombre:'], data['Tipo de gráfico:'], data['Lista:'], data['Pregunta:'])
 end
 
 When(/^I'm on the "([^"]*)" section$/) do |arg|
 end
 
-Then(/^"([^"]*)" shows up in the graphics list$/) do |graphicName|
-    titulo = find('span', text: graphicName, match: :prefer_exact)
-    expect(titulo).to have_ancestor('chart')
+Then(/^"([^"]*)" of type "([^"]*)" shows up in the graphics list$/) do |graphicName, graphicType|
+  graphic = @reportCampaignPage.getGraphicInfoFromList(graphicName, graphicType)
+  expect(graphic).to be
 end
 
 Then(/^"([^"]*)" field shows a set of options as below$/) do |fieldName, questionsList|
     questionsList = questionsList.raw
     questionsList = questionsList.flatten
-    field = find_field(getPollField(fieldName))
-    questionsList.each { |question| expect(field).to have_content(question) }
+    questions = @reportCampaignPage.getQuestions(fieldName)
+    questionsList.each { |question| expect(questions).to include(question) }
 end 
 
 Then(/^"([^"]*)" field shows a set of list related questions as below$/) do |fieldName, questionsList|
     questionsList = questionsList.raw
     questionsList = questionsList.flatten
-    field = find_field(getGraphicMysteryField(fieldName))
-    questionsList.each { |question| expect(field).to have_content(question) }
+    questions = @reportCampaignPage.getQuestionsMystery(fieldName)
+    questionsList.each { |question| expect(questions).to include(question) }
 end
   
 
 When(/^click on the gear icon on the "([^"]*)" graphic$/) do |graphicName|
-    titulo = find('span', text: graphicName, match: :prefer_exact)
-    chart = titulo.ancestor('chart')
-    chart.find('.fa-cog').click
+  @reportCampaignPage.configureGraphic(graphicName)
 end
 
-When(/^select "([^"]*)" on the "([^"]*)" field$/) do |option, field|
-    modal = find('app-settings')
-    getFieldAction(field).(option, modal)
+When(/^select on the fields as below$/) do |table|
+  data = table.rows_hash
+  @reportCampaignPage.fillInConfigureGraphicData(data['Agencias:'], data['Regionales:'], data['Pregunta:'], data['Servicios:'], data['Puntos de Servicio:'])
 end
 
 When(/^select "([^"]*)" on the "([^"]*)" field events$/) do |option, field|

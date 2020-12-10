@@ -8,8 +8,7 @@ Feature: Configure the values of a graphic
         Given I am in the login page 
         And I enter a username and a password
         And click on the "Iniciar Sesión" button
-        And I press the "Reportes" option
-        And I press the "Campaña" option
+        And I press the "Campañas" option within "Reportes"
 
     @TouchPoint
     Scenario: Poll questions are available to be selected while configuring a graphic
@@ -39,7 +38,8 @@ Feature: Configure the values of a graphic
         And click on the "CasaMatriz" campaign
         And click on the "Asignacion Cajas" poll
         And click on the gear icon on the "GraphicTest1" graphic
-        And select "Gerencia Regional" on the "Regionales:" field
+        And select on the fields as below
+        |Regionales:|Gerencia Regional|
         Then "Agencias:" field shows a set of options as below
         |Agencia Central 1 |
         |Agencia Central 2 |
@@ -51,8 +51,9 @@ Feature: Configure the values of a graphic
         And click on the "CasaMatriz" campaign
         And click on the "Asignacion Cajas" poll
         And click on the gear icon on the "GraphicTest1" graphic
-        And select "Gerencia Regional" on the "Regionales:" field
-        And select "Agencia Central 1" on the "Agencias:" field
+        And select on the fields as below
+        |Regionales:|Gerencia Regional|
+        |Agencias:           |Agencia Central 1                 |
         Then "Servicios:" field shows a set of options as below
         |Plataforma Servicio    |
         |Plataforma Negocios    |
@@ -65,8 +66,9 @@ Feature: Configure the values of a graphic
         And click on the "CasaMatriz" campaign
         And click on the "Asignacion Cajas" poll
         And click on the gear icon on the "GraphicTest1" graphic
-        And select "Gerencia Regional" on the "Regionales:" field
-        And select "Agencia Central 1" on the "Agencias:" field
-        And select "Cajas" on the "Servicios:" field
+        And select on the fields as below
+        |Regionales:|Gerencia Regional|
+        |Agencias:           |Agencia Central 1                 |
+        |Servicios:                    |Cajas                                  |
         Then "Puntos de Servicio:" field shows a set of options as below
         |Ninguno    |

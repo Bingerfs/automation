@@ -8,8 +8,7 @@ Feature: Add new graphic to a campaign poll
         Given I am in the login page 
         And I enter a username and a password
         And click on the "Iniciar Sesión" button
-        And I press the "Reportes" option
-        And I press the "Campaña" option
+        And I press the "Campañas" option within "Reportes"
 
     @TouchPoint
     Scenario: Recently created graphic is within the list of graphics
@@ -25,7 +24,7 @@ Feature: Add new graphic to a campaign poll
 
         And click on the "Crear" button
         Then a message in green shows up "Gráfico agregado con éxito"
-        And "GraphicTest" shows up in the graphics list
+        And "GraphicTest" of type "Barra Agrupada" shows up in the graphics list
 
     @TouchPoint
     Scenario: Poll Questions are selectionable when creating a graphic
@@ -53,7 +52,7 @@ Feature: Add new graphic to a campaign poll
 
         And click on the "Crear" button
         Then a message in green shows up "Gráfico agregado con éxito"
-        And "GraphicTest2" shows up in the graphics list
+        And "GraphicTest2" of type "Barra Agrupada" shows up in the graphics list
 
 
     @MysteryShopper
