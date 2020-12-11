@@ -91,11 +91,14 @@ class ReportCampaign
     end
   end
 
-  def fillInNewGraphicData(name, type, question)
-    driver.within(@@modalCreate[:locator]) do
-      name ? driver.fill_in(@@nameField[:locator], with: name) : nil
-      type ? driver.select(type, from: @@typeField[:locator]) : nil
-      question ? driver.select(question, from: @@questionField[:locator]) : nil
+  def fillInFormGraphicData(modal, data)
+    makeFormFieldDictionary(modal)
+    data.each_pair do |key, value|
+      if key == 'Nombre:'
+        driver.fill_in(getFormField(key), with: value)
+      else
+        driver.select(value, from: getFormField(value))
+      end
     end
   end
 

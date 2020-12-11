@@ -17,7 +17,7 @@ Feature: Configure the values of a graphic
         And click on the "CasaMatriz" campaign
         And click on the "Asignacion Cajas" poll
         And click on the gear icon on the "GraphicTest1" graphic
-        Then "Pregunta:" field shows a set of options as below
+        Then "Pregunta:" field on the "touchpoint configure modal" shows a set of options as below
         |Nos recomendaria a sus conocidos?  |
         |Que factores influyeron?           |
 
@@ -28,7 +28,7 @@ Feature: Configure the values of a graphic
         And click on the "CasaMatriz" campaign
         And click on the "Asignacion Cajas" poll
         And click on the gear icon on the "GraphicTest1" graphic
-        Then "Regionales:" field shows a set of options as below
+        Then "Regionales:" field on the "touchpoint configure modal" shows a set of options as below
         |Gerencia Regional  |
 
     @TouchPoint
@@ -38,9 +38,9 @@ Feature: Configure the values of a graphic
         And click on the "CasaMatriz" campaign
         And click on the "Asignacion Cajas" poll
         And click on the gear icon on the "GraphicTest1" graphic
-        And select on the fields as below
+        And fill the required graphic fields on the "touchpoint configure modal" as below
         |Regionales:|Gerencia Regional|
-        Then "Agencias:" field shows a set of options as below
+        Then "Agencias:" field on the "touchpoint configure modal" shows a set of options as below
         |Agencia Central 1 |
         |Agencia Central 2 |
     
@@ -51,10 +51,10 @@ Feature: Configure the values of a graphic
         And click on the "CasaMatriz" campaign
         And click on the "Asignacion Cajas" poll
         And click on the gear icon on the "GraphicTest1" graphic
-        And select on the fields as below
+        And fill the required graphic fields on the "touchpoint configure modal" as below
         |Regionales:|Gerencia Regional|
         |Agencias:           |Agencia Central 1                 |
-        Then "Servicios:" field shows a set of options as below
+        Then "Servicios:" field on the "touchpoint configure modal" shows a set of options as below
         |Plataforma Servicio    |
         |Plataforma Negocios    |
         |Cajas                  |
@@ -66,9 +66,9 @@ Feature: Configure the values of a graphic
         And click on the "CasaMatriz" campaign
         And click on the "Asignacion Cajas" poll
         And click on the gear icon on the "GraphicTest1" graphic
-        And select on the fields as below
+        And fill the required graphic fields on the "touchpoint configure modal" as below
         |Regionales:|Gerencia Regional|
         |Agencias:           |Agencia Central 1                 |
         |Servicios:                    |Cajas                                  |
-        Then "Puntos de Servicio:" field shows a set of options as below
+        Then "Puntos de Servicio:" field on the "touchpoint configure modal" shows a set of options as below
         |Ninguno    |

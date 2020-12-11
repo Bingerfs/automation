@@ -7,10 +7,9 @@ Feature: See event report graphic
         Given I am in the login page 
         And I enter a username and a password
         And click on the "Iniciar Sesión" button
-        And I press the "Reportes" option
-        And I press the "ReportesEventos" option
+        And I press the "Eventos" option within "Reportes"
 
         Scenario: detailed graphic is the same as it was displayed on the list
         Given I'm on the "Eventos" section of the "Reportes" page
         And click on the eye icon on the "Barra Simple" graphic of type "Barra Simple"
-        Then I should see the same graphic "Barra Simple" as it was displayed on the list
+        Then I see the same graphic "Barra Simple" of type "Barra Simple" as it was displayed on the list

@@ -37,6 +37,7 @@ end
 When(/^I press the "([^"]*)" option within "([^"]*)"$/) do |option, link|
     navbar = Navbar.new(page)
     navbar.go_to(link, option)
+    @pageObject = getPageObject(link + option, page)
 end
 
 Given(/^I'm on the "([^"]*)" section of the "([^"]*)" page$/) do |arg, arg2|

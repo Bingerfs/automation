@@ -17,7 +17,7 @@ Feature: Add new graphic to a campaign poll
         And click on the "CasaMatriz" campaign
         And click on the "Asignacion Cajas" poll
         And click on the "Agregar Gráfica" button
-        And fill the required graphic fields as below
+        And fill the required graphic fields on the "touchpoint create modal" as below
         |Nombre:            | GraphicTest                   |
         |Tipo de gráfico:   | Barra Agrupada                |
         |Pregunta:          | Que factores influyeron?      |
@@ -44,7 +44,7 @@ Feature: Add new graphic to a campaign poll
         And click on the "DemoPedidosYa" campaign
         And click on the "PedidosYa MS" poll
         And click on the "Agregar Gráfica" button
-        And fill the required mystery poll graphic fields as below
+        And fill the required graphic fields on the "mysteryshopper create modal" as below
         |Nombre:            | GraphicTest2                              |
         |Tipo de gráfico:   | Barra Horizontal                          |
         |Lista:             | Preparación                               |
@@ -76,7 +76,7 @@ Feature: Add new graphic to a campaign poll
         And click on the "DemoPedidosYa" campaign
         And click on the "PedidosYa MS" poll
         And click on the "Agregar Gráfica" button
-        And fill the required mystery poll graphic fields as below
+        And fill the required graphic fields on the "mysteryshopper create modal" as below
         |Lista:             | Preparación       |
         Then "Pregunta:" field on the "mysteryshopper create modal" shows a set of options as below
         |Se conecta en la zona asignada             |

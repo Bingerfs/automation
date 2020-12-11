@@ -7,6 +7,7 @@ require 'capybara/cucumber'
 require 'capybara-screenshot/cucumber'
 require_relative '../../pages/navbar'
 require_relative '../../pages/report_campaign'
+require_relative '../../pages/report_event'
     
     # PTravel Settings
 ENV['USER']="admin"

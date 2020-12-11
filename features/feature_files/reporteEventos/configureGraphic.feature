@@ -8,15 +8,15 @@ Feature: Configure the values of a graphic
         Given I am in the login page 
         And I enter a username and a password
         And click on the "Iniciar Sesión" button
-        And I press the "Reportes" option
-        And I press the "ReportesEventos" option
+        And I press the "Eventos" option within "Reportes"
 
 #Regionales
     Scenario: detailed graphic is the same as it was displayed on the list
         Given I'm on the "Eventos" section of the "Reportes" page
         When click on the gear icon on the "Barra Simple" graphic
-        And select "Telefonica" on the "Compañias:" field events
-        Then "Regionales:" field shows a set of options as below
+        And fill the required graphic fields on the "event configure report" as below
+        |Compañias:             | Telefonica       |
+        Then "Regionales:" field on the "event configure report" shows a set of options as below
         |Ninguna|
         |Cochabamba |
         |La Paz |
@@ -26,21 +26,22 @@ Feature: Configure the values of a graphic
     Scenario: detailed graphic is the same as it was displayed on the list
         Given I'm on the "Eventos" section of the "Reportes" page
         When click on the gear icon on the "Barra Simple" graphic
-        And select "Telefonica" on the "Compañias:" field events
-        Then "Agencias:" field shows a set of options as below
-        |Ninguna|
-        |Central |
-        |Ventas |
-        |Atencion al Cliente|
+        And fill the required graphic fields on the "event configure report" as below
+        |Compañias:             | Telefonica       |
+        |Regionales:            |Cochabamba        |
+        Then "Agencias:" field on the "event create report" shows a set of options as below
+        |Agencia 1|
+        |Agencia 2 |
 
 #servicios
     Scenario: detailed graphic is the same as it was displayed on the list
         Given I'm on the "Eventos" section of the "Reportes" page
         When click on the gear icon on the "Barra Simple" graphic
-        And select "Telefonica" on the "Compañias:" field events
-        And select "Cochabamba" on the "Regionales:" field events
-        And select "Agencia 1" on the "Agencias:" field events
-        Then "Servicios:" field shows a set of options as below
+        And fill the required graphic fields on the "event configure report" as below
+        |Compañias:             | Telefonica       |
+        |Regionales:            |Cochabamba        |
+        |Agencias:              |Agencia 1         |
+        Then "Servicios:" field on the "event configure report" shows a set of options as below
         |Ninguno|
         |Cajas |
         |Plataforma |
@@ -49,11 +50,12 @@ Feature: Configure the values of a graphic
     Scenario: detailed graphic is the same as it was displayed on the list
         Given I'm on the "Eventos" section of the "Reportes" page
         When click on the gear icon on the "Barra Simple" graphic
-        And select "Telefonica" on the "Compañias:" field events
-        And select "Cochabamba" on the "Regionales:" field events
-        And select "Agencia 1" on the "Agencias:" field events
-        And select "Cajas" on the "Servicios:" field events
-        Then "Puntos de Servicio:" field shows a set of options as below
+        And fill the required graphic fields on the "event configure report" as below
+        |Compañias:             | Telefonica       |
+        |Regionales:            |Cochabamba        |
+        |Agencias:              |Agencia 1         |
+        |Servicios:             |Cajas             |
+        Then "Puntos de Servicio:" field on the "event configure report" shows a set of options as below
         |Ninguno|
         |Caja 1 |
         |Caja 2 |

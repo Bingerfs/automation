@@ -46,11 +46,7 @@ Before('@ReporteCampania') do
         find(:xpath, '/html/body/modal-container/div/div/app-create-survey-view/div/form/div[1]/div[3]/input').fill_in(:with => 'Vista final')
         click_on('Crear')
     end
-    elementName = find('div', text: 'TV2')
-    parentContainer = elementName.ancestor('.odd-text')
-    within(parentContainer) do
-        find('i.fa:nth-child(2)').click
-    end
+    find('body > app-root > div > div > app-surveys > div > div > div.col-lg-10.pt-3 > div > div > div.row.ng-star-inserted > div > div.row.odd.ng-star-inserted > div > survey-view > div > div.row.survey-table-item.table-rows.odd-text > div.col-2.text-right.survey-table-icon.vertical-align-center > i').click
     click_on('Agregar pregunta ')
     within('app-create-question') do
         find(:xpath, '/html/body/modal-container/div/div/app-create-question/div/form/div[1]/div[1]/input').fill_in(:with => 'questionTest')
