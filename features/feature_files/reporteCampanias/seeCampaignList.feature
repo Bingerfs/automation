@@ -1,4 +1,4 @@
-@ReporteCampania
+
 Feature: See campaigns list on campaign reports
         As a company administrator
         I want to see all campaigns and their polls

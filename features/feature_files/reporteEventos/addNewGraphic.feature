@@ -10,6 +10,7 @@ Feature: Add new graphic to campaign
         And click on the "Iniciar Sesión" button
         And I press the "Eventos" option within "Reportes"
 
+  @addGraphicEvent
   Scenario: Recently created graphic is within the list of graphics
             Given I'm on the "Eventos" section of the "Reportes" page
             When click on the "Agregar Gráfica" button

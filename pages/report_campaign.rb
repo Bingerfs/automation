@@ -7,7 +7,7 @@ class ReportCampaign
 
   @@listOfCampaigns = { locator: 'aside' }
   @@listOfPolls = { locator: '../../../..' }
-  @@polls = { locator: 'span', options: { class: ['sidebar-name'], match: :prefer_exact } }
+  @@polls = { locator: 'span', options: { class: ['sidebar-name'], wait: 30 } }
   @@campaigns = { locator: 'span', options: { class: ['sidebar-name', 'text-overflow-campaigns-sidebar'], match: :prefer_exact } }
   @@listOfGraphics = { locator: 'div', options: { class: ['ng-sidebar__content'], match: :prefer_exact } }
   @@modalChart = { locator: 'app-full-view' }
@@ -45,7 +45,11 @@ class ReportCampaign
   end
 
   def getPolls(campaign)
+    driver.scroll_to(@campaignFound)
     container = @campaignFound ? @campaignFound.find(:xpath, @@listOfPolls[:locator]) : nil
+    driver.using_wait_time 15 do
+      driver.find('span', text: 'CAMPAÑAS DISPONIBLES').click
+    end
     driver.within(container) do
       texts = driver.all(@@polls[:locator], @@polls[:options]).map { |span| span.text }
       return texts
@@ -65,6 +69,15 @@ class ReportCampaign
       chart = titulo.ancestor('chart')
       chart.find('.fa-eye').click
     end
+  end
+
+  def deleteGraphic(graphicName)
+    driver.within(@@listOfGraphics[:locator], @@listOfGraphics[:options]) do
+      titulo = driver.find('span', text: graphicName)
+      chart = titulo.ancestor('chart')
+      chart.find('.fa-trash').click
+    end
+    driver.click_on('Si')
   end
 
   def configureGraphic(graphicName)
@@ -121,6 +134,7 @@ class ReportCampaign
   def getOptions(fieldName, modal)
     makeFormFieldDictionary(modal)
     field = driver.find_field(getFormField(fieldName))
+    sleep 5
     texts = field.all('option').map { |option| option.text }
     return texts
   end

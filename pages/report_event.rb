@@ -21,6 +21,15 @@ class ReportEvent
     end
   end
 
+  def deleteGraphic(graphicName)
+    driver.within(@@listOfGraphics[:locator]) do
+      titulo = driver.find('span', text: graphicName)
+      chart = titulo.ancestor('chart')
+      chart.find('.fa-trash').click
+    end
+    driver.click_on('Si')
+  end
+
   def configureGraphic(graphicName)
     driver.within(@@listOfGraphics[:locator]) do
       titulo = driver.find('span', text: graphicName)

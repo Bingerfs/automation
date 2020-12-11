@@ -10,6 +10,7 @@ Feature: Add new graphic to a campaign poll
         And click on the "Iniciar Sesión" button
         And I press the "Campañas" option within "Reportes"
 
+    @addGraphic
     @TouchPoint
     Scenario: Recently created graphic is within the list of graphics
         Given I'm on the "Campañas" section of the "Reportes" page
