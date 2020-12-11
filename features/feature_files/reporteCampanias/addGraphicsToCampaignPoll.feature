@@ -33,7 +33,7 @@ Feature: Add new graphic to a campaign poll
         And click on the "CasaMatriz" campaign
         And click on the "Asignacion Cajas" poll
         And click on the "Agregar Gráfica" button
-        Then "Pregunta:" field shows a set of options as below
+        Then "Pregunta:" field on the "touchpoint create modal" shows a set of options as below
         |Nos recomendaria a sus conocidos?  |
         |Que factores influyeron?           |
 
@@ -62,7 +62,7 @@ Feature: Add new graphic to a campaign poll
         And click on the "DemoPedidosYa" campaign
         And click on the "PedidosYa MS" poll
         And click on the "Agregar Gráfica" button
-        Then "Lista:" field shows a set of options as below
+        Then "Lista:" field on the "mysteryshopper create modal" shows a set of options as below
         |Preparación                |
         |Productividad              |
         |Antes de la Actividad      |
@@ -78,7 +78,7 @@ Feature: Add new graphic to a campaign poll
         And click on the "Agregar Gráfica" button
         And fill the required mystery poll graphic fields as below
         |Lista:             | Preparación       |
-        Then "Pregunta:" field shows a set of list related questions as below
+        Then "Pregunta:" field on the "mysteryshopper create modal" shows a set of options as below
         |Se conecta en la zona asignada             |
         |Tiene equipamento completo                 |
         |Demuestra seguridad al conducir            |

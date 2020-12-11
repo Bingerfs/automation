@@ -1,7 +1,9 @@
 require_relative './modules/graphicTypeDictionary_module'
+require_relative './modules/modalFormFactory_module'
 
 class ReportCampaign
   include Dictionary_GraphicNames
+  include FactoryModalFormFields
 
   @@listOfCampaigns = { locator: 'aside' }
   @@listOfPolls = { locator: '../../../..' }
@@ -91,9 +93,9 @@ class ReportCampaign
 
   def fillInNewGraphicData(name, type, question)
     driver.within(@@modalCreate[:locator]) do
-      driver.fill_in(@@nameField[:locator], with: name)
-      driver.select(type, from: @@typeField[:locator])
-      driver.select(question, from: @@questionField[:locator])
+      name ? driver.fill_in(@@nameField[:locator], with: name) : nil
+      type ? driver.select(type, from: @@typeField[:locator]) : nil
+      question ? driver.select(question, from: @@questionField[:locator]) : nil
     end
   end
 
@@ -113,35 +115,11 @@ class ReportCampaign
     end
   end
 
-  def getQuestions(fieldName)
-    fieldLoc = ''
-    case fieldName
-    when 'Lista:'
-      fieldLoc = @@listField[:locator]
-    when 'Pregunta:'
-      fieldLoc = @@questionField[:locator]
-    when 'Regionales:'
-      fieldLoc = @@regionalField[:locator]
-    when 'Agencias:'
-      fieldLoc = @@agencyField[:locator]
-    when 'Servicios:'
-      fieldLoc = @@serviceField[:locator]
-    when 'Puntos de Servicio:'
-      fieldLoc = @@pointServiceField[:locator]
-    end
-    field = driver.find_field(fieldLoc)
+  def getOptions(fieldName, modal)
+    makeFormFieldDictionary(modal)
+    field = driver.find_field(getFormField(fieldName))
     texts = field.all('option').map { |option| option.text }
     return texts
-  end
-
-
-
-  def getQuestionsMystery(fieldName)
-    driver.within(@@modalCreateMystery[:locator]) do
-      field = driver.find_field(@@questionMysteryField[:locator])
-      texts = field.all('option').map { |option| option.text }
-      return texts
-    end
   end
 
 end

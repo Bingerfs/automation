@@ -1,3 +1,4 @@
+=begin
 module Dictionary_PollFields
     dict = {
         'Nombre:' => 'title',
@@ -77,5 +78,21 @@ module MyWorld
     include Dictionary_GraphicFieldsMystery
 end
  
+
+World(MyWorld)
+=end
+
+module Dictionary_Routes
+    dict = {
+      "Reportes" => 'reports',
+      'Eventos' => 'events'
+    }
+    define_method(:getRoute) { |route| return dict[route] }
+end
+
+module MyWorld
+    include Dictionary_Routes
+end
+
 
 World(MyWorld)
