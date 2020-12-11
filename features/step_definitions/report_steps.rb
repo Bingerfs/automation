@@ -1,5 +1,3 @@
-
-
 When(/^click on the eye icon on the "([^"]*)" graphic of type "([^"]*)"$/) do |graphic, graphicType|
   @pageObject.openGraphic(graphic)
 end

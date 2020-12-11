@@ -28,8 +28,6 @@ When(/^I press the "([^"]*)" button$/) do |nombre|
     end
 end
 
-
-
 When(/^I press the "([^"]*)" option$/) do |link|
     navbar = Navbar.new(page)
     navbar.go_to(link)

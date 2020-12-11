@@ -138,5 +138,4 @@ class ReportCampaign
     texts = field.all('option').map { |option| option.text }
     return texts
   end
-
 end
